@@ -1,53 +1,80 @@
 import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { LineChart } from "react-native-chart-kit";
 
 import { MonoText } from '../components/StyledText';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
           <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
+            source = {require('../assets/images/Logo.png')}
             style={styles.welcomeImage}
           />
         </View>
-
+        <View style={styles.profileContainer}>
+          <Text style={{fontSize: 36, color:'white'}}>Juan Pablo</Text>
+          <Image source={require('../assets/images/jp.jpg')}
+            style={styles.profileImage}
+          />
+          <Text style={{color:'white'}}>I am passionate about the ocean!</Text>
+        </View>
+        <View style={styles.chart}>
+          <LineChart
+            data={{
+              labels: ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul."],
+              datasets: [
+                {
+                  data: [100, 150, 360, 600, 900, 1200, 2700]
+                }
+              ]
+            }}
+            width={Dimensions.get("window").width - 50} // from react-native
+            height={220}
+            chartConfig={{
+              backgroundColor: "#e26a00",
+              backgroundGradientFrom: "#3aded6",
+              backgroundGradientTo: "#ffa726",
+              decimalPlaces: 0, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16
+              },
+              propsForDots: {
+                r: "6",
+                strokeWidth: "2",
+                stroke: "#ffa726"
+              }
+            }}
+            bezier
+            style={{
+              marginVertical: 8,
+              borderRadius: 16
+            }}
+          />
+        </View>
         <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
-
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
+          <View
+            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
             <MonoText>screens/HomeScreen.js</MonoText>
           </View>
-
-          <Text style={styles.getStartedText}>
-            Change any of the text, save the file, and your app will automatically reload.
-          </Text>
         </View>
 
         <View style={styles.helpContainer}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
+            <Text style={styles.helpLinkText}>
+              Help, it didn’t automatically reload!
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-      </View>
     </View>
   );
 }
@@ -92,7 +119,7 @@ function handleHelpPress() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#101212',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -110,8 +137,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 80,
+    height: 60,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
@@ -120,8 +147,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 50,
   },
+  profileContainer: {
+    alignItems: 'center',
+  },
   homeScreenFilename: {
-    marginVertical: 7,
+    marginVertical: 20,
+  },
+  name: {
+    marginVertical: 20,
+    fontSize: 50,
+    color: 'white',
+  },
+  profileImage: {
+    marginVertical: 10,
+    borderRadius: 75,
+    height: 150,
+    width: 150,
+    
+  },
+  chart: {
+    marginVertical: 30,
+    alignItems: 'center',
   },
   codeHighlightText: {
     color: 'rgba(96,100,109, 0.8)',
