@@ -9,17 +9,9 @@ import Map from '../components/Map'
 export default function CommunityScreen() {
   return (
     <View style={styles.container}>
+      <Map/>
     </View>
   );
-}
-export default class CommunityScreen extends React.Component{
-  render() {
-    return(
-      <View style={styles.container}>
-        <Map/>
-      </View>
-    );
-  }
 }
 
 CommunityScreen.navigationOptions = {
