@@ -6,13 +6,15 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
 export default function LinksScreen() {
   return (
-    <View class="chat">
-      <View class="main-panel">
-        <View class="content">
-          <View class="header">
-            <View class="chat-details">
-              <Text id="topic-id"> </Text>
-              <Text id="sequence-number"> </Text>
+    <View style={styles.container}>
+      <View style={styles.chat}>
+        <View style={styles.mainPanel}>
+          <View style={styles.content}>
+            <View style={styles.header}>
+              <View class="chat-details">
+                <Text id="topic-id"> Yo</Text>
+                <Text id="sequence-number"> Bruh</Text>
+              </View>
             </View>
           </View>
         </View>
@@ -22,11 +24,35 @@ export default function LinksScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#101212',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   chat: {
     backgroundColor: 'grey',
     padding: 0,
     height: 100,
     width: 100,
     display: 'flex',
+  },
+  mainPanel: {
+    backgroundColor: 'snow',
+    padding: 2,
+    width: 100,
+  },
+  content: {
+    backgroundColor: '#ffffff',
+    height: 100,
+  },
+  header: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#fafbff',
+    justifyContent: 'space-between',
+    display: 'flex',
+    height: 80,
+    padding: 20,
   },
 });
