@@ -3,28 +3,44 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+const io = require('socket.io-client');
 
-export default function LinksScreen() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.chat}>
-        <View style={styles.mainPanel}>
-          <View style={styles.content}>
-            <View style={styles.header}>
-              <View class="chat-details">
-                <Text id="topic-id"> Yo</Text>
-                <Text id="sequence-number"> Bruh</Text>
-              </View>
-            </View>
-          </View>
-        </View>
+// Replace this URL with your own, if you want to run the backend locally!
+const SocketEndpoint = 'https://de3dd357.ngrok.io';
+
+export default class LinksScreen extends React.Component {
+  state = {
+    isConnected: false,
+    data: null,
+  };
+  componentDidMount() {
+    const socket = io(SocketEndpoint, {
+      transports: ['websocket'],
+    });
+
+    socket.on('connect', () => {
+      this.setState({ isConnected: true });
+    });
+
+    socket.on('ping', data => {
+      this.setState(data);
+    });
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>connected: {this.state.isConnected ? 'true' : 'false'}</Text>
+        {this.state.data &&
+          <Text>
+            ping response: {this.state.data}
+          </Text>}
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  /*container: {
     flex: 1,
     backgroundColor: '#101212',
     justifyContent: 'space-between',
@@ -54,5 +70,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: 80,
     padding: 20,
+  },*/
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
