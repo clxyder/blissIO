@@ -2,7 +2,7 @@
 Let's have some fun!
 
 ## Start backend server
-'cd backend' then 'npm start'
+`cd backend` then `npm start`
 
 ## Start mobile application
-'expo start' to launch application
+`expo start` to launch application
