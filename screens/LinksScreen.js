@@ -6,7 +6,8 @@ import { RectButton, ScrollView } from 'react-native-gesture-handler';
 const io = require('socket.io-client');
 
 // Replace this URL with your own, if you want to run the backend locally!
-const SocketEndpoint = 'NGROCK LINK';
+// const SocketEndpoint = 'NGROCK LINK';
+const SocketEndpoint = 'https://26275d0e.ngrok.io';
 
 export default class LinksScreen extends React.Component {
   state = {
